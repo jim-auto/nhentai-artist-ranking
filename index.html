@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Artist Atlas — nhentai metadata ranking</title>
-  <meta name="description" content="nhentai公開メタデータにおけるartistタグの掲載規模ランキング">
+  <title>Artist Atlas — nhentai favorites ranking</title>
+  <meta name="description" content="nhentai APIのnum_favoritesを集計したartistランキング">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,18 +12,17 @@
     <header class="hero">
       <p class="eyebrow">METADATA ATLAS / 2026</p>
       <h1>Artist <span>Atlas</span></h1>
-      <p class="lead">nhentai由来の公開メタデータを、作品数と更新量から静かに読み解く。</p>
+      <p class="lead">作品ごとの favorites をartist単位に集計し、支持の厚みを読み解く。</p>
       <p class="notice">このページは成人向けサイト由来のメタデータを扱います。画像・本文は表示しません。</p>
     </header>
     <section class="controls" aria-label="ランキング操作">
       <label>検索 <input id="search" type="search" placeholder="artist名で絞り込み"></label>
-      <label>並び順 <select id="sort"><option value="galleries">作品数</option><option value="recent">直近12か月</option><option value="pages">総ページ数</option><option value="score">指数</option></select></label>
+      <label>並び順 <select id="sort"><option value="favorites">favorites合計</option><option value="median_favorites">favorites中央値</option><option value="top_favorites">最多作品</option><option value="galleries">作品数</option></select></label>
     </section>
     <section class="summary" id="summary"></section>
-    <section class="table-wrap"><table><thead><tr><th>#</th><th>Artist</th><th>作品数</th><th>総ページ数</th><th>直近12か月</th><th>指数</th></tr></thead><tbody id="table"></tbody></table></section>
-    <footer><p>集計方法: artistタグ付きギャラリー数を主指標に、ページ数・直近12か月の掲載数を補助表示。</p><p>出典: <a href="https://github.com/van-geaux/unofficial-nhentai-api">非公式メタデータスナップショット</a> · <a href="https://nhentai.net">nhentai.net</a></p></footer>
+    <section class="table-wrap"><table><thead><tr><th>#</th><th>Artist</th><th>favorites合計</th><th>中央値</th><th>最多作品</th><th>作品数</th></tr></thead><tbody id="table"></tbody></table></section>
+    <footer><p>集計方法: artistタグ掲載数上位100組について、作品ごとの num_favorites を合計。全artistの完全順位ではありません。</p><p>出典: <a href="https://nhentai.net/api/v2">nhentai API v2</a> · <a href="https://nhentai.net">nhentai.net</a></p></footer>
   </main>
   <script src="app.js"></script>
 </body>
 </html>
-
