@@ -44,7 +44,9 @@ def main() -> None:
     requests = 1
     for index, artist in enumerate(artists, 1):
         if str(artist["id"]) in cache:
-            rows.append(cache[str(artist["id"])])
+            cached = cache[str(artist["id"])]
+            cached["artist_url"] = "https://nhentai.net" + artist["url"]
+            rows.append(cached)
             print(f"[{index}/{len(artists)}] {artist['name']}: cached", flush=True)
             continue
         if index > 1:
@@ -60,7 +62,7 @@ def main() -> None:
         total = sum(favorites)
         median = favorites[len(favorites) // 2] if favorites else 0
         row = {
-            "artist": artist["name"], "tag_id": artist["id"],
+            "artist": artist["name"], "tag_id": artist["id"], "artist_url": "https://nhentai.net" + artist["url"],
             "galleries": len(favorites), "favorites": total,
             "median_favorites": median, "top_favorites": favorites[0] if favorites else 0,
         }
