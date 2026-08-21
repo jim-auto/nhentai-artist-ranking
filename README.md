@@ -1,19 +1,21 @@
-# nhentai Artist Favorites Ranking
+# nhentai Artist & Character Favorites Ranking
 
-nhentai.net API v2 の公開メタデータを集計し、作品ごとの `num_favorites` を artist 単位に合算する静的ランキングです。
+nhentai.net API v2 の公開メタデータを集計し、作品ごとの `num_favorites` を artist / character 単位に合算する静的ランキングです。
 
 ## 指標
 
 - **favorites合計**: artistごとに取得した人気上位25作品の `num_favorites` 合計。主ランキング。
 - **favorites中央値**: 作品ごとのお気に入り数の中央値。
 - **最多作品**: artistの作品のうち最大の `num_favorites`。
+- **主要Tags**: 人気上位2作品の詳細に含まれる一般タグを頻度順に表示。
 
-全artistの全作品を毎回取得するのは過剰なアクセスになるため、artistタグ掲載数上位100組について、favorites順の上位25作品だけを比較対象にしています。画像・本文は取得・保存しません。
+全artist / characterの全作品を毎回取得するのは過剰なアクセスになるため、それぞれ掲載数上位100組について、favorites順の上位25作品だけを比較対象にしています。主要Tagsは各対象の人気上位2作品から取得します。画像・本文は取得・保存しません。
 
 ## 更新
 
 ```powershell
 python scripts/build_favorites_ranking.py
+python scripts/build_characters_ranking.py
 ```
 
 既定では、公開されている日次更新スナップショットの月別 CSV をダウンロードし、`data/ranking.json` を生成します。GitHub Actions から週次更新する場合は `.github/workflows/update.yml` を利用します。

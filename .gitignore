@@ -1,4 +1,6 @@
 data/raw/
 data/favorites-cache.json
+data/characters-cache.json
+data/gallery-tags-cache.json
 __pycache__/
 *.pyc

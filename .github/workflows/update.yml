@@ -17,10 +17,11 @@ jobs:
         with:
           python-version: "3.x"
       - run: python scripts/build_favorites_ranking.py
+      - run: python scripts/build_characters_ranking.py
       - name: Commit updated aggregate
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add data/favorites-ranking.json
+          git add data/favorites-ranking.json data/characters-ranking.json
           git diff --cached --quiet || git commit -m "chore: update artist ranking"
           git push
